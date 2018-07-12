@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Listas</title>
+	<link rel="stylesheet" type="text/css" href="css/ListasCSS.css"/>
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body>
+
+		<h1>Listas Shiditas </h1>
+	<div class = "Wrapper">
+		<div class = "Div" id = "New">New
+			<ul class = "listselect" id = "listnew"></ul>
+		</div>
+		<div class = "Div" id = "Ready">Ready
+			<ul class = "listselect" id = "listready"></ul>
+		</div>
+		<div class = "Div" id = "Waiting">Waiting
+			<ul class = "listselect" id = "listwaiting"></ul>
+		</div>
+		<div class = "Div" id = "Finish">Finish
+			<ul class = "listselect" id = "listfinish"></ul>
+		</div>
+	</div>
+	<br>
+	<br>	
+		<div id = "ButtonHolder">
+				<input id="texto" type="text" name="">
+			<button id = "Add">Add</button>
+			<button id = "ToReady">To Ready</button>
+			<button id = "ToWaiting">To Waiting</button>
+			<button id = "ToFinish">To Finish</button>
+		</div>
+
+
+<script type="text/javascript">
+		var add;
+		var selected1 = ("");
+		var selected2 = ("");
+		var selected3 = ("");
+
+	
+    
+		$("#Add").click(function()
+		{
+			$("#listnew").append("<li>"+$("#texto").val()+"</li>");
+
+			add = $("#texto").val();
+			console.log(add);
+			$("#texto").val("");
+		});
+
+			$("#listnew").selectable(
+			{
+				stop: function()
+				{
+					$(".ui-selected").each(function () 
+					{
+						 selected1 += $(this).text();
+						console.log(selected1)
+					});
+				}				
+				});
+			
+
+			$("#ToReady").click(function()
+			{
+
+				$("#listready").append("<li>"+selected1+"</li>")
+				selected1 = ("");
+				$(".ui-selected").remove($(".ui-selected").selectedIndex);
+				
+				
+			});
+				
+
+
+			$("#listready").selectable(
+			{
+				stop: function()
+				{
+					$(".ui-selected").each(function ()
+					{
+						selected2 += $(this).text();
+						console.log(selected2)
+
+					});
+				}
+			});
+
+			$("#ToWaiting").click(function()
+			{
+				$("#listwaiting").append("<li>"+selected2+"</li>");
+				selected2 = ("");
+				$(".ui-selected").remove($(".ui-selected").selectedIndex);
+
+			});
+
+			$("#listwaiting").selectable(
+			{
+				stop: function()
+				{
+					$(".ui-selected").each(function()
+					{
+						selected3 += $(this).text();
+						console.log(selected3)
+					});
+				}
+			});
+
+			$("#ToFinish").click(function()
+			{
+				$("#listfinish").append("<li>"+selected3+"</li>");
+				selected3 = ("");
+				$(".ui-selected").remove($(".ui-selected").selectedIndex);
+			});
+
+
+</script>
+<label></label>
+</body>
+</html>
