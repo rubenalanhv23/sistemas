@@ -84,30 +84,27 @@
 		  }
 		 
 		
-		/*var myTimer2 = setInterval(Tiempo2, 1000)
+		var myTimer2 = setInterval(Tiempo2, 1000)
 		function Tiempo2()
-		{
-			var tiempoIO = 0;
-			tiempoIO++;
-			arrayIO.push(tiempoIO);
-			if (ban == false)
+		{	
+
+			var tiempoIO = json.random;
+			if (tiempoIO > 0)
 			{
-			$("#listIO").append("<li>"+json.proceso+ "</li>");
-			ban = 1;
+			$("#listIO").append("<li>"+json.proceso+ " " +tiempoIO+ "</li>");
+			tiempoIO--;
 			$("#listwaiting").empty();
-			elementoswaiting.pop();
+			clearInterval(myTimer2)
 			}
-			else if (json.random == tiempoIO)
+			else if (tiempoIO == 0)
 			{	
 				clearInterval(myTimer2);
 				$("#listIO").empty();
-				ban = 0;
-				tiempoIO = 0;
 				$("#listfinish").append("<li>"+json.proceso+"</li>");
 
 			}
 
-		}*/
+		}
 	}
 	}
 	
