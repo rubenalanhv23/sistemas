@@ -24,6 +24,9 @@
 		<div class = "Div" id = "Waiting">Waiting
 			<ul class = "listselect" id = "listwaiting"></ul>
 		</div>
+		<div id = "IO">IO
+			<ul class = "listselect" id = listIO></ul>
+		</div>
 		<div class = "Div" id = "Finish">Finish
 			<ul class = "listselect" id = "listfinish"></ul>
 		</div>
@@ -40,88 +43,76 @@
 
 
 <script type="text/javascript">
-		var add;
-		var selected1 = ("");
-		var selected2 = ("");
-		var selected3 = ("");
-
-	
-    
+		var i;
+		var ban = 0;
+		var arrayIO = [];
+		var elementoswaiting = [];
+		var arr =[];
+		var tic = 0;
+		var random;
+		var proceso;
+		var json;
 		$("#Add").click(function()
 		{
-			$("#listnew").append("<li>"+$("#texto").val()+"</li>");
-
-			add = $("#texto").val();
-			console.log(add);
+			var random = Math.floor((Math.random()*10));
+			var proceso = $("#texto").val();
+			var json = {"proceso": proceso, "random":random};
+			arr.push(json);
+			console.log(json);
+			$("#listnew").append("<li>"+json.proceso+"</li>");
 			$("#texto").val("");
-		});
+		
+	var myTimer = setInterval(Tiempo, 1000)
+	function Tiempo()
+	{	
 
-			$("#listnew").selectable(
+		$("#listready").append("<li>"+json.proceso+"</li>");
+
+		elementoswaiting.push(json.proceso);
+		clearInterval(myTimer);
+		$("#listnew").empty();
+		var myTimer1 = setInterval(Tiempo1, 1000)
+		function Tiempo1()
+		{
+		
+		console.log(elementoswaiting.length);
+		 if(elementoswaiting.length <= 5 )
+		 {
+		$("#listwaiting").append("<li>"+json.proceso+"</li>");
+		clearInterval(myTimer1);
+		$("#listready").empty();
+		  }
+		 
+		
+		/*var myTimer2 = setInterval(Tiempo2, 1000)
+		function Tiempo2()
+		{
+			var tiempoIO = 0;
+			tiempoIO++;
+			arrayIO.push(tiempoIO);
+			if (ban == false)
 			{
-				stop: function()
-				{
-					$(".ui-selected").each(function () 
-					{
-						 selected1 += $(this).text();
-						console.log(selected1)
-					});
-				}				
-				});
-			
+			$("#listIO").append("<li>"+json.proceso+ "</li>");
+			ban = 1;
+			$("#listwaiting").empty();
+			elementoswaiting.pop();
+			}
+			else if (json.random == tiempoIO)
+			{	
+				clearInterval(myTimer2);
+				$("#listIO").empty();
+				ban = 0;
+				tiempoIO = 0;
+				$("#listfinish").append("<li>"+json.proceso+"</li>");
 
-			$("#ToReady").click(function()
-			{
+			}
 
-				$("#listready").append("<li>"+selected1+"</li>")
-				selected1 = ("");
-				$(".ui-selected").remove($(".ui-selected").selectedIndex);
-				
-				
-			});
-				
-
-
-			$("#listready").selectable(
-			{
-				stop: function()
-				{
-					$(".ui-selected").each(function ()
-					{
-						selected2 += $(this).text();
-						console.log(selected2)
-
-					});
-				}
-			});
-
-			$("#ToWaiting").click(function()
-			{
-				$("#listwaiting").append("<li>"+selected2+"</li>");
-				selected2 = ("");
-				$(".ui-selected").remove($(".ui-selected").selectedIndex);
-
-			});
-
-			$("#listwaiting").selectable(
-			{
-				stop: function()
-				{
-					$(".ui-selected").each(function()
-					{
-						selected3 += $(this).text();
-						console.log(selected3)
-					});
-				}
-			});
-
-			$("#ToFinish").click(function()
-			{
-				$("#listfinish").append("<li>"+selected3+"</li>");
-				selected3 = ("");
-				$(".ui-selected").remove($(".ui-selected").selectedIndex);
-			});
-
-
+		}*/
+	}
+	}
+	
+});
+		
 </script>
 <label></label>
 </body>
